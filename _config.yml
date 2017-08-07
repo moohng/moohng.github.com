@@ -78,4 +78,5 @@ theme: hexo-theme-laughing
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
+  branch: coding-pages
   repo: git@git.coding.net:moohng/mohng.com.git
