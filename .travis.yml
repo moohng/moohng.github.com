@@ -1,6 +1,5 @@
 language: node_js
-node_js:
-  - "8"
+node_js: stable
 
 branches:
   only:
@@ -8,11 +7,23 @@ branches:
 
 before_install:
 
+# 配置SSH
+
+
+# 配置git
+- git config --global user.name Kevin
+- git config --global user.email moohng@126.com
 
 install:
 
+# 安装依赖
+- npm install hexo-cli -g
+- npm install
+
 script:
-  yarn run deploy
+
+# 部署
+- yarn run deploy
 
 cache:
   directories:
