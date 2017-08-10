@@ -8,7 +8,7 @@ branches:
 before_install:
 
 # 配置SSH
-
+- cat ~/.ssh/id_rsa.pub
 
 # 配置git
 - git config --global user.name Kevin
