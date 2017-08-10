@@ -1,18 +1,16 @@
 language: node_js
 node_js: stable
 
+sudo: false
+
+addons:
+  ssh_known_hosts: git.coding.net
+
 branches:
   only:
   - master
 
 before_install:
-
-# 配置SSH
-- cat ~/.ssh/id_rsa.pub
-
-# 配置git
-- git config --global user.name Kevin
-- git config --global user.email moohng@126.com
 
 install:
 
@@ -20,11 +18,24 @@ install:
 - npm install hexo-cli -g
 - npm install
 
+before_script:
+
 script:
 
-# 部署
-- yarn run deploy
+# before_deploy:
+
+deploy:
+  provider: script
+  script: sh .travis/deploy.sh
+  skip_cleanup: true
+  on:
+    branch: master
+
+# after_deploy:
+
+after_script:
 
 cache:
+  apt: true
   directories:
     - node_modules
