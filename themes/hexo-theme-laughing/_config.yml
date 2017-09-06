@@ -1,0 +1,49 @@
+# Icon
+favicon: /favicon.ico
+# SEO
+keywords: Hexo, js, Nodejs, React, Vue, JavaScript, CSS3, 前端
+# Header
+page_background: http://callfiles.ueibo.com/hexo-theme-laughing/page_background.jpg
+page_menu_button: dark
+post_background: http://callfiles.ueibo.com/hexo-theme-laughing/post_background.jpg
+post_menu_button: light
+title_plancehold: 随笔
+author:
+  head: http://callfiles.ueibo.com/hexo-theme-laughing/thumb.jpg
+  signature: Only when you plant the flowers can you really smell their fragrance.
+navication:
+  - name: JavaScript
+    link: /categories/JavaScript/
+  - name: React
+    link: /categories/React/
+  - name: Vue
+    link: /categories/Vue/
+  - name: 全栈
+    link: /categories/全栈/
+  - name: CSS
+    link: /categories/CSS/
+  - name: Github
+    link: https://github.com/moohng
+# content
+content_width: 800
+# Footer
+## Social icon list: [facebook, twitter, weibo, wechat, github, stackoverflow, linkin, email, segmentfault, flickr, zhihu, disqus, douban, bilibili]
+social:
+  - name: Github
+    icon: github
+    link: https://github.com/moohng
+  - name: Weibo
+    icon: weibo
+    link: https://weibo.com/moohng
+  - name: SegmentFault
+    icon: segmentfault
+    link: https://www.segmentfault.com/u/bon
+# Duoshuo
+duoshuo:
+  enable: true
+  siteName: ueibo
+# Copyright
+copyright:
+  record: false
+  hexo: true
+  laughing: true
