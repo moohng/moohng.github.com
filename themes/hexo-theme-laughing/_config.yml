@@ -22,6 +22,8 @@ navication:
     link: /categories/全栈/
   - name: CSS
     link: /categories/CSS/
+  - name: 其他
+    link: /categories/其他/
   - name: Github
     link: https://github.com/moohng
 # content
