@@ -12,7 +12,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://mohng.com
+url: http://moohng.com
 root: /
 permalink: :year/:month/:day/:id/
 permalink_defaults:
@@ -79,4 +79,4 @@ theme: hexo-theme-laughing
 deploy:
   type: git
   branch: master
-  repo: git@git.coding.net:moohng/mohng.com.git
+  repo: git@github.com:moohng/moohng.github.com.git
