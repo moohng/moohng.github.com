@@ -79,4 +79,4 @@ theme: hexo-theme-laughing
 deploy:
   type: git
   branch: master
-  repo: git@github.com:moohng/moohng.github.com.git
+  repo: git@github.com:moohng/moohng.github.io.git
