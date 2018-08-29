@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="description" content="专注前端，记录生活！"><meta name="keywords" content="Hexo, js, Nodejs, React, Vue, JavaScript, CSS3, 前端"><title>前端工具篇：浅谈Git和Github - 红颜漠</title><link rel="stylesheet" href="/css/main_style.min.css"><link rel="icon" href="/favicon.ico"></head><body><input id="navi" type="checkbox"><ul class="main-navication"><li><a href="/"><span>Home</span></a></li><li><a href="/categories/JavaScript/"><span>JavaScript</span></a></li><li><a href="/categories/React/"><span>React</span></a></li><li><a href="/categories/Vue/"><span>Vue</span></a></li><li><a href="/categories/全栈/"><span>全栈</span></a></li><li><a href="/categories/CSS/"><span>CSS</span></a></li><li><a href="/categories/其他/"><span>其他</span></a></li><li><a href="https://github.com/moohng"><span>Github</span></a></li></ul><div class="wrapper" id="wrap"><div class="post-header"><label class="navi-button light" for="navi">MENU</label><img class="background" src="http://callfiles.ueibo.com/hexo-theme-laughing/post_background.jpg"><div class="post-title"><h1 class="title">前端工具篇：浅谈Git和Github</h1><ul class="meta"><li><i class="icon icon-author"></i>Kevin</li><li><i class="icon icon-clock"></i>11 Minutes</li><li><i class="icon icon-calendar"></i>2017年8月10日</li></ul></div></div><div class="article-content" style="max-width:800px"><p>首先指出，<code>Git</code>和<code>Github</code>不是一个概念，完全没有可比性。</p>
+<p><code>Git</code>可以说是每个程序员必备的技能，<code>Github</code>是检验一个程序员是否合格的标准。反正这东西虽然不一定要十分精通，但一定要能懂会用。<code>Git</code>是一个实用的版本控制（代码管理）工具，<code>Github</code>则是一个仓库托管（代码共享）平台，全国大神聚集的地方，装逼神器。</p>
+<p>关于<code>Git</code>的详细教程建议阅读其<a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">官方文档</a>，中文版，就是有点多，对于一般人来说阅读前三章即可。本篇文章主要介绍下面这几个方面：</p>
+<ul>
+<li>Git的基本使用</li>
+<li>Git与GitHub搭配使用</li>
+<li>Git分支</li>
+<li>GitHub静态站点</li>
+</ul>
+<p>这是我总结的对于一般开发人员来说，比较实用的几个方面。本篇文章，只会引入几个概念和一些比较重要的思想，不是一篇纯教程。</p>
+<h2 id="Git的基本使用"><a href="#Git的基本使用" class="headerlink" title="Git的基本使用"></a>Git的基本使用</h2><p><code>Git</code>是一个<strong>分布式</strong>版本控制工具，对应的<code>SVN</code>则是<strong>集中式</strong>版本控制工具。如果你不知道<code>SVN</code>，那也没必要去学它了（除非工作需要），直接学<code>Git</code>可能更实用一点。</p>
+<h3 id="分布式和集中式"><a href="#分布式和集中式" class="headerlink" title="分布式和集中式"></a>分布式和集中式</h3><p>简单的说，<strong>集中式</strong>，就是将项目集中在一台服务器上进行管理。而<strong>分布式</strong>就是将项目分布在各台计算机或服务器中进行管理。分布式管理中每台计算机都是一个完整的仓库，而集中式管理中只能在服务器中进行版本管理。听起来可能很模糊，详细请参考<a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">官方介绍</a>。</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><ol>
+<li>配置用户信息</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 名称和邮箱随意， Git仅用于记录身份</span></span><br><span class="line">$ git config --global user.name <span class="string">"John Doe"</span></span><br><span class="line">$ git config --global user.email johndoe@example.com</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>基本命令</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在项目根目录下运行 初始化一个本地仓库</span></span><br><span class="line">$ git init</span><br><span class="line"><span class="comment"># 跟踪文件 或将文件添加到 暂存区</span></span><br><span class="line">$ git add 文件名</span><br><span class="line"><span class="comment"># 提交 将暂存区的文件提交到版本控制中</span></span><br><span class="line">$ git commit -m <span class="string">"提交信息"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前版本状态 有事没事多敲敲</span></span><br><span class="line">$ git status</span><br></pre></td></tr></table></figure>
+<p>这是一个最基本的操作流程。但是实际使用中，总是不会如此顺利，会遇到各种问题和需求。建议：</p>
+<ul>
+<li><strong>遇到问题要多使用<code>--help</code>和<code>-h</code>参数查看帮助</strong>。</li>
+<li><strong>多使用<code>git status</code>命令</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 比如查看push相关的用法</span></span><br><span class="line">$ git push -h</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">$ git push --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+<p>这里补充一下，<code>Git</code>有三个工作区域：工作目录、暂存区、Git仓库。我们写代码可以直接操作的是<strong>工作目录</strong>，通过<code>git add</code>将文件添加到<strong>暂存区</strong>，<code>git commit</code>指令将文件提交到<strong>Git仓库</strong>。</p>
+<h3 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h3><ol>
+<li>放弃本次工作目录中的修改</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- 文件名</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>将暂存区的文件移除到工作目录</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git reset HEAD 文件名</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>.gitignore</code>不起作用</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 移除git仓库中所有文件，不会从真实的目录移除</span></span><br><span class="line">$ git rm -r --cached .</span><br></pre></td></tr></table></figure>
+<p>这种情况是Git仓库中已经有了（跟踪了）某个文件，然后又修改了<code>.gitignore</code>文件，所以需要用上面的命令将要忽略的文件从Git仓库中移除。<code>.</code>代表移除所有文件。</p>
+<ol start="4">
+<li>执行命令报错<code>Unable to create &#39;/.git/index.lock&#39;: File exists</code>之类的</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除该文件即可</span></span><br><span class="line">$ rm -rf .git/index.lock</span><br></pre></td></tr></table></figure>
+<p>出现该问题一般都是之前手动或其他问题而终止了某条命令。</p>
+<h2 id="Git与GitHub搭配使用"><a href="#Git与GitHub搭配使用" class="headerlink" title="Git与GitHub搭配使用"></a>Git与GitHub搭配使用</h2><p>对于个人来说，<code>Git</code>的远程仓库大多都是<code>github</code>。要将一个本地仓库推送到<code>github</code>上，首先必须<code>github</code>上要存在一个与本地同名的仓库，并且与本地仓库关联起来。</p>
+<h3 id="基本使用-1"><a href="#基本使用-1" class="headerlink" title="基本使用"></a>基本使用</h3><p>你有两种方式可以选择，第一就是首先在<code>github</code>上建立项目仓库，然后克隆到本地使用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git@github.com:username/project-name.git</span><br></pre></td></tr></table></figure>
+<p>第二种就是本地已经存在一个项目仓库，然后先在<code>github</code>上建立一个同名的仓库，并关联起来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加远程仓库</span></span><br><span class="line">$ git remote add origin git@github.com:username/project-name.git</span><br><span class="line"><span class="comment"># 推送到远程服务器</span></span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>如果<code>push</code>失败，先<code>pull</code>更新到本地，然后再执行上面的<code>push</code>命令。这里的<code>origin</code>是远程仓库的名称，也是默认的。一个本地的<code>Git</code>仓库可以添加多个远程仓库，远程仓库名用来区分每个远程仓库（一般可能用不上，对于个人来说，远程仓库一般都是<code>github</code>一个）。</p>
+<h3 id="配置SSH"><a href="#配置SSH" class="headerlink" title="配置SSH"></a>配置SSH</h3><p>如果要使用<code>github</code>，配置一个SSH公钥也是必不可少的。如果你执行某项操作提示你没有权限，那么很有可能就是没有正确配置SSH公钥。</p>
+<p>一台本地计算机对应一个SSH公钥，一个<code>github</code>账号可以添加多个SSH公钥，也就是说可以通过多台电脑来管理一个<code>github</code>账号下的项目仓库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成SSH公钥 一路回车即可</span></span><br><span class="line">$ ssh-keygen</span><br><span class="line"><span class="comment"># 查看生成的SSH公钥</span></span><br><span class="line">$ cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>然后，复制所有查看到的内容，添加到<code>github</code>上即可。</p>
+<h2 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h2><p><code>Git</code>的另一个重要的特性就是<strong>分支</strong>，要学好分支，必须得先弄懂<code>Git</code>分支的本质。</p>
+<h3 id="理解分支"><a href="#理解分支" class="headerlink" title="理解分支"></a>理解分支</h3><p>每建立一个<code>Git</code>仓库，默认就有一个<code>master</code>分支（主分支）。<strong><code>Git</code>中的分支本质上就是一个指向commit对象的指针</strong>。每<code>commit</code>一次，就对应一个提交记录（暂且就叫版本号），把这些提交记录想象成一条串联起来的方块，而分支就是指向这些方块的指针。</p>
+<p>因此，在一个分支上的所有修改和提交只会将当前分支的指向往最新的版本移动，而其他分支依旧指向原来的提交版本，不会有任何影响。</p>
+<p><code>Git</code>中可以有很多分支，<strong>HEAD指针指向当前的分支</strong>，建议参考<a href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%AE%80%E4%BB%8B" target="_blank" rel="noopener">官方解释</a>，图文例子很形象，一定要理解它的本质和原理。</p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建分支</span></span><br><span class="line">$ git branch 分支名</span><br><span class="line"><span class="comment"># 创建并切换到分支</span></span><br><span class="line">$ git checkout -b 分支名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">$ git branch -d 分支名</span><br><span class="line"><span class="comment"># 合并其他分支到当前分支</span></span><br><span class="line">$ git meger 分支名</span><br></pre></td></tr></table></figure>
+<p>对于新手，建议不要在重要的项目上试用各种<strong>分支操作</strong>，不然你会越高越乱，最后可能就回不去了。</p>
+<h2 id="GitHub静态站点"><a href="#GitHub静态站点" class="headerlink" title="GitHub静态站点"></a>GitHub静态站点</h2><p><code>github</code>有一个十分强大的特性，就是每一个仓库，都可以是一个<strong>可访问的静态站点</strong>，也就是说，你可以将<code>html</code>文件放在仓库中，可以通过域名的方式来访问这个页面。</p>
+<p><code>github</code>提供一个主站点，它的仓库名必须是<code>username.github.io</code>（<code>username</code>就是你自己的用户名），默认访问的域名是<code>username.github.io</code>，而且还可以配置自己的域名（比如<code>baidu.com</code>，前提是这个域名是你的）。其他项目站点都只能通过<code>username.github.io/project-name</code>的形式访问。大多数人都会用这个主站点搭建一个个人的主页或博客之类的，网上与之相关的教程很多，对于非专业的前端开发人员，大多就是采用<code>hexo</code>来快速搭建自己的博客系统。有兴趣的可以自己百度<code>hexo</code>关键字，会有很多相关的教程。</p>
+<p>其他项目有三种方法将仓库配置为可访问的站点，具体请<a href="https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/" target="_blank" rel="noopener">参考这里</a>。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p><code>Git</code>对于刚接触的人可能并不友好，一路走来，我不知道弄坏了多少个项目仓库。最好是身边有会的人指导，这样会少走很多弯路。我的前端开发之路只有我一个人，而且所有东西全部都是靠自学，吃过的苦踩过的坑也是不计其数。</p>
+</div><div class="article-meta" style="max-width:800px"><div class="tags"><i class="icon icon-tag"></i><ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a><span class="tag-list-count">1</span></li></ul></div><div class="categories"><i class="icon icon-category"></i><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/全栈/">全栈</a><span class="category-list-count">4</span></li></ul></div></div><div class="article-comment" style="max-width:800px"><div class="ds-thread" id="ds-thread" data-thread-key="cjlf039yn0005fwut9g5rbagx" data-title="前端工具篇：浅谈Git和Github" data-url="http://moohng.com/2017/08/10/cjlf039yn0005fwut9g5rbagx/" site-name="ueibo"></div><script>var siteName = document.getElementById('ds-thread').getAttribute('site-name');
+var duoshuoQuery = {short_name: siteName};
+(function() {
+  var ds = document.createElement('script');
+  ds.type = 'text/javascript';ds.async = true;
+  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+  ds.charset = 'UTF-8';
+  (document.getElementsByTagName('head')[0] 
+  || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script></div><ul class="navication"><li class="home"><a href="/"><i class="icon icon-home"></i></a></li><li><a href="/2017/09/06/cjlf039ys0009fwuthj9vk20m/"><i class="icon icon-arror-left"></i></a></li><li><a href="/2017/08/10/cjlf039ym0004fwututp2odah/"><i class="icon icon-arror-right"></i></a></li></ul><div class="page-footer"><div class="top"><ul class="social"><li><a href="https://github.com/moohng" title="Github" target="_blank"><i class="icon icon-github"></i></a></li><li><a href="https://weibo.com/moohng" title="Weibo" target="_blank"><i class="icon icon-weibo"></i></a></li><li><a href="https://www.segmentfault.com/u/bon" title="SegmentFault" target="_blank"><i class="icon icon-segmentfault"></i></a></li></ul></div><div class="bottom"><p class="copyright">© 2018 红颜漠<br><small>POWER BY <a href="https://hexo.io" target="_blank">HEXO</a></small><small>, THEME BY <a href="https://github.com/BoizZ/hexo-theme-laughing" target="_blank">LAUGHING</a></small></p></div></div></div><script>var wrap = document.getElementById('wrap');
+window.onload = function () {
+  wrap.className += ' done';
+}</script></body></html>

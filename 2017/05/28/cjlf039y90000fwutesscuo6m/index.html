@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="description" content="专注前端，记录生活！"><meta name="keywords" content="Hexo, js, Nodejs, React, Vue, JavaScript, CSS3, 前端"><title>从前端到后台：一个聊天项目带你撸全栈 - 红颜漠</title><link rel="stylesheet" href="/css/main_style.min.css"><link rel="icon" href="/favicon.ico"></head><body><input id="navi" type="checkbox"><ul class="main-navication"><li><a href="/"><span>Home</span></a></li><li><a href="/categories/JavaScript/"><span>JavaScript</span></a></li><li><a href="/categories/React/"><span>React</span></a></li><li><a href="/categories/Vue/"><span>Vue</span></a></li><li><a href="/categories/全栈/"><span>全栈</span></a></li><li><a href="/categories/CSS/"><span>CSS</span></a></li><li><a href="/categories/其他/"><span>其他</span></a></li><li><a href="https://github.com/moohng"><span>Github</span></a></li></ul><div class="wrapper" id="wrap"><div class="post-header"><label class="navi-button light" for="navi">MENU</label><img class="background" src="http://callfiles.ueibo.com/hexo-theme-laughing/post_background.jpg"><div class="post-title"><h1 class="title">从前端到后台：一个聊天项目带你撸全栈</h1><ul class="meta"><li><i class="icon icon-author"></i>Kevin</li><li><i class="icon icon-clock"></i>8 Minutes</li><li><i class="icon icon-calendar"></i>2017年5月28日</li></ul></div></div><div class="article-content" style="max-width:800px"><p>差不多花了整整两个星期，终于把<a href="https://app.moohng.com" target="_blank" rel="noopener">这个聊天APP</a>的后台架构搭建出来了。虽然花的时间比较多，但这也是我第一次写后台，其实也并没有想象中的那么难，但也还是很折腾，尤其是在数据库这一块，几乎全部都是英文文档（看得都只想**）。</p>
+<h2 id="项目概述"><a href="#项目概述" class="headerlink" title="项目概述"></a>项目概述</h2><p>该聊天App高仿iOS端的微信，当然没这么复杂，目前已实现功能有：</p>
+<ul>
+<li>用户注册、登录、注销功能；</li>
+<li>自动缓存已登录用户，关闭浏览器窗口失效；</li>
+<li>聊天室：所以在线用户之间聊天；</li>
+<li>与在线用户之间聊天；</li>
+<li>获取所有在线用户；</li>
+<li>获取好友列表；</li>
+<li>添加好友：后台接口已完成，前端目前尚未实现。</li>
+</ul>
+<p>现在几乎每天都在更新，争取把它做得更像一个正规的聊天应用。不过由于该应用是基于Web页面的，用户体验和数据持久化等诸多方面肯定没法跟客户端应用相比。</p>
+<h3 id="前端Web界面"><a href="#前端Web界面" class="headerlink" title="前端Web界面"></a>前端Web界面</h3><p>前端界面在一个多月前就已经差不多写出来了，苦于一直没有后台接口（API）的支持，所以仅仅只是一个界面展示，并无实际聊天的功能。</p>
+<ul>
+<li>github地址：<a href="https://github.com/moohng/wchat-vue" target="_blank" rel="noopener">https://github.com/moohng/wchat-vue</a></li>
+<li>在线预览地址：<a href="https://app.moohng.com" target="_blank" rel="noopener">https://app.moohng.com</a></li>
+</ul>
+<p>对前端我就不做深入的介绍了，主要是基于<code>Vue</code>来实现的。而且对于一个前端开发者来说，后台实现可能更具有挑战性。</p>
+<h3 id="后台实现"><a href="#后台实现" class="headerlink" title="后台实现"></a>后台实现</h3><p>为了实现真实的聊天功能，我决定自己来搭建后台，这也是我第一次写后台。整个后台应用基于<code>Node.js</code>平台，采用<code>express</code>模块来搭建HTTP服务器，聊天功能采用<code>WebSocket</code>实现，数据库使用的是<code>MongoDB</code>。</p>
+<ul>
+<li>github地址：<a href="https://github.com/moohng/wchat-sv" target="_blank" rel="noopener">https://github.com/moohng/wchat-sv</a></li>
+</ul>
+<p>主要使用的技术栈包括：<code>Node.js</code>、<code>express</code>、<code>express-session</code>、<code>express-ws</code>、<code>mongodb</code>、<code>mongoose</code>。</p>
+<h2 id="后台逻辑分析"><a href="#后台逻辑分析" class="headerlink" title="后台逻辑分析"></a>后台逻辑分析</h2><p>初次写后台，最难的可能就是架构了，因为你要对整个应用的需求、实现的功能、数据的模型等有一个清晰的思路逻辑。我可能也就是在这方面花的时间是最多的，总是不知道该如何下手。很多次都是写着写着就写不下去了，因为逻辑行不通了。</p>
+<h3 id="遇到的问题和难点"><a href="#遇到的问题和难点" class="headerlink" title="遇到的问题和难点"></a>遇到的问题和难点</h3><ul>
+<li>如何判断用户是否是登录状态？如何记住用户的登录状态？</li>
+<li>如何断定当前登录的用户是否成功连接了<code>WebSocket</code>服务器？</li>
+<li>当一个来自客户端的<code>websocket</code>请求时，如何判断该用户是否已登录？需要一个身份识别功能，否则谁都可以任意接入<code>websockt</code>服务器了。</li>
+<li>HTTP服务器与<code>WebSocket</code>服务器之间如何并存？又如何交互？因为只有聊天功能和消息推送功能使用<code>ws</code>，其他所有的请求都是与http服务器通信。</li>
+<li><code>ws</code>服务器如何判断消息的转发目标？如果目标用户不在线又如何处理？</li>
+<li>如何搭建数据库？对于初次接触的人来说这也是个难题。</li>
+<li>如何连接和操作数据库？起码要基本的增删改查。</li>
+<li>密码加密问题，这同样是一个很大的难题。</li>
+</ul>
+<p>其实问题还有很多很多，这可能对于后台开发人员来说都显得小儿科，但这些真是我开发过程中遇到的问题，当然还不止如此。到目前为止，有的问题已经解决了，有的问题仍未解决，或没有找到更好的解决方案。</p>
+<p>其实，学习也就是一个发现问题，然后解决问题的过程。当你把一个一个的问题都解决之后，你也就在不知不觉中慢慢成长起来了。贵在坚持，也难在坚持。</p>
+<h3 id="模块介绍"><a href="#模块介绍" class="headerlink" title="模块介绍"></a>模块介绍</h3><p>对于上面的问题，我也是自己网上找资料，目前主要引用到了这些模块框架：</p>
+<ul>
+<li><code>express</code>：基本上是整个后台应用的支撑，HTTP和<code>ws</code>都是建立在此基础之上。一个<code>Node.js</code>上很强大的东西，可以让你快速创建一个Web应用。</li>
+<li><code>express-session</code>：这个是<code>express</code>的插件，主要用来解决上面说到的判断用户是否登录的问题。</li>
+<li><code>express-ws</code>：这也是一个<code>express</code>的插件，用来构件一个<code>ws</code>服务器。之前采用的是<code>ws</code>框架，但与<code>express</code>交互性太差，不好在<code>ws</code>和<code>http</code>之间通信。</li>
+<li><code>body-parser</code>：一个<code>express</code>框架，主要用来解析<code>POST</code>请求发过来的数据。</li>
+<li><code>mongoose</code>：一个用来操作<code>mongodb</code>数据库的框架。还有一个叫做<code>mongolass</code>的框架，比这个量级要轻。</li>
+</ul>
+<h3 id="主目录结构"><a href="#主目录结构" class="headerlink" title="主目录结构"></a>主目录结构</h3><p>由于是第一次写后台，后台结构分的并不是很清晰。</p>
+<ul>
+<li><code>index.js</code>：入口文件，创建一个http服务器和一个ws服务器，并连接到数据库。</li>
+<li><code>model</code>：该目录主要写一些与数据库交互的代码。</li>
+<li><code>routes</code>：这个目录主要处理路由，大部分的操作都是在该目录下进行的。</li>
+</ul>
+<p>主要的架构就是这样，基本操作都在<code>routes</code>目录下，因为后台也就是为前端写接口。在<code>routes</code>目录下又分了不同的子路由，比如：<code>friend</code>、<code>user</code>、<code>ws</code>、<code>message</code>等，分别处理不同的请求。</p>
+<p>看起来很简单，但做起来真的不容易，最可怕的是代码量大了，你会陷入一个大量重复代码和无限回调的噩梦，我想大部分人都经历过<code>js</code>的回调噩梦。目前也只是有了个初步的逻辑架构，后面可能会根据需求的不同而变更。代码也需要优化，有的自己一遍一遍写起来就恶心。</p>
+<h2 id="两个容易误会的概念"><a href="#两个容易误会的概念" class="headerlink" title="两个容易误会的概念"></a>两个容易误会的概念</h2><p>本篇文章主要作个整体的介绍，因为该Web应用目前仍在开发中，很多功能还不确定，等后面整个逻辑清晰了再作总结。下面说两个很经典的问题，也是前端很容易误会的问题，至少我是误会了很久。</p>
+<h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p>在这之前，对跨域访问是一知半解，不知道到底该如何解决这个问题。这里要提出，<strong>跨域访问不是前端的问题，其实大部分都是后台的问题</strong>。对于跨域，网上有两种解决方案：JSONP和Ajax。对于JSONP没什么研究，不作介绍，好像也并不是很实用，这里主要介绍Ajax跨域的问题。</p>
+<p>下面是我后台解决跨域问题的方案：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    res.set(&#123;</span><br><span class="line">        <span class="comment">// 跨域cookie 不能为通配符 *</span></span><br><span class="line">        <span class="string">'Access-Control-Allow-Origin'</span>: <span class="string">'http://localhost:8808'</span>,</span><br><span class="line">        <span class="string">'Access-Control-Allow-Methods'</span>: <span class="string">'GET,POST'</span>,</span><br><span class="line">        <span class="comment">// 跨域cookie必须为true</span></span><br><span class="line">        <span class="string">'Access-Control-Allow-Credentials'</span>: <span class="literal">true</span></span><br><span class="line">    &#125;);</span><br><span class="line">    next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>简单的说一下，跨域其实浏览器是可以正常的收到来自于服务的响应，只是无法正确的解析。通过在服务器端对响应头写入<code>&#39;Access-Control-Allow-Origin&#39;: &#39;*&#39;</code>和<code>&#39;Access-Control-Allow-Methods&#39;: &#39;GET,POST&#39;</code>，浏览器才能正确的解析服务器的响应。<strong>记住是在服务器端对响应头的操作</strong>，我之前一直误会是在前端的请求头中写入，现在想想有点傻逼了。</p>
+<p>对于<code>&#39;Access-Control-Allow-Credentials&#39;: true</code>，是用来处理跨域中cookie的问题。因为默认情况下，cookie是不允许在跨域访问中传输的。要解决这个问题，<code>Access-Control-Allow-Origin</code>的值就不能为通配符<code>*</code>，并且前端通过Ajax发起请求时也要做处理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(url, &#123;</span><br><span class="line">    method: <span class="string">'GET'</span>,</span><br><span class="line">    xhrFields: &#123;</span><br><span class="line">        withCredentials: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>之前对<code>Cookie</code>的认识一直就是一种类似于缓存的东西，但具体是做什么，怎么用，并不清楚。这是要指出两点：</p>
+<ul>
+<li><strong>Cookie基本上都是由后台来管理的，前端不需要任何操作</strong></li>
+<li><strong>Cookie信息会在每次发起的请求中自动携带</strong></li>
+</ul>
+<p>那么，这下就清晰多了。如果你仅仅只是搞前端，基本上是用不到<code>Cookie</code>的。虽然也可以通过<code>js</code>代码读取到<code>cookie</code>数据，但大部分服务器都是禁用掉此操作，也就是让你在前端无法通过<code>js</code>代码读取到<code>cookie</code>的内容，读取到的是空字符串。</p>
+<p>因为<code>cookie</code>是每次发起请求都会自动携带的，所以服务器就可以通过<code>cookie</code>来识别用户的身份、是否处于登录状态等，就像你进入某个网站有时候会自动识别你的身份并登录。而<code>cookie</code>也是可以设置过期时间的，所以服务器端就可以控制你的身份多久失效，失效之后你就要重新登录了。</p>
+<p>你可以自己尝试在浏览器的控制台通过<code>document.cookie</code>来获取一下网站的<code>cookie</code>信息。也可以尝试清除浏览器的<code>cookie</code>，然后再刷新你登录的网站，看是否需要重新登录。</p>
+<p>我这个项目中用到的<code>express-session</code>就是通过<code>cookie</code>来识别用户身份的。使用<code>express-session</code>的好处就是你不需要自己要操作<code>cookie</code>，使用起来简单。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>我一般写文章都是针对自己实际遇到的问题来的，我目前也是在不断的学习中，过几天就会写一篇文章作个总结。</p>
+</div><div class="article-meta" style="max-width:800px"><div class="tags"><i class="icon icon-tag"></i><ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全栈/">全栈</a><span class="tag-list-count">1</span></li></ul></div><div class="categories"><i class="icon icon-category"></i><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/全栈/">全栈</a><span class="category-list-count">4</span></li></ul></div></div><div class="article-comment" style="max-width:800px"><div class="ds-thread" id="ds-thread" data-thread-key="cjlf039y90000fwutesscuo6m" data-title="从前端到后台：一个聊天项目带你撸全栈" data-url="http://moohng.com/2017/05/28/cjlf039y90000fwutesscuo6m/" site-name="ueibo"></div><script>var siteName = document.getElementById('ds-thread').getAttribute('site-name');
+var duoshuoQuery = {short_name: siteName};
+(function() {
+  var ds = document.createElement('script');
+  ds.type = 'text/javascript';ds.async = true;
+  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+  ds.charset = 'UTF-8';
+  (document.getElementsByTagName('head')[0] 
+  || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script></div><ul class="navication"><li class="home"><a href="/"><i class="icon icon-home"></i></a></li><li><a href="/2017/08/08/cjlf039yf0001fwutrwypc5q4/"><i class="icon icon-arror-left"></i></a></li></ul><div class="page-footer"><div class="top"><ul class="social"><li><a href="https://github.com/moohng" title="Github" target="_blank"><i class="icon icon-github"></i></a></li><li><a href="https://weibo.com/moohng" title="Weibo" target="_blank"><i class="icon icon-weibo"></i></a></li><li><a href="https://www.segmentfault.com/u/bon" title="SegmentFault" target="_blank"><i class="icon icon-segmentfault"></i></a></li></ul></div><div class="bottom"><p class="copyright">© 2018 红颜漠<br><small>POWER BY <a href="https://hexo.io" target="_blank">HEXO</a></small><small>, THEME BY <a href="https://github.com/BoizZ/hexo-theme-laughing" target="_blank">LAUGHING</a></small></p></div></div></div><script>var wrap = document.getElementById('wrap');
+window.onload = function () {
+  wrap.className += ' done';
+}</script></body></html>

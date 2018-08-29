@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="description" content="专注前端，记录生活！"><meta name="keywords" content="Hexo, js, Nodejs, React, Vue, JavaScript, CSS3, 前端"><title>正向代理和反向代理，一次说清 - 红颜漠</title><link rel="stylesheet" href="/css/main_style.min.css"><link rel="icon" href="/favicon.ico"></head><body><input id="navi" type="checkbox"><ul class="main-navication"><li><a href="/"><span>Home</span></a></li><li><a href="/categories/JavaScript/"><span>JavaScript</span></a></li><li><a href="/categories/React/"><span>React</span></a></li><li><a href="/categories/Vue/"><span>Vue</span></a></li><li><a href="/categories/全栈/"><span>全栈</span></a></li><li><a href="/categories/CSS/"><span>CSS</span></a></li><li><a href="/categories/其他/"><span>其他</span></a></li><li><a href="https://github.com/moohng"><span>Github</span></a></li></ul><div class="wrapper" id="wrap"><div class="post-header"><label class="navi-button light" for="navi">MENU</label><img class="background" src="http://callfiles.ueibo.com/hexo-theme-laughing/post_background.jpg"><div class="post-title"><h1 class="title">正向代理和反向代理，一次说清</h1><ul class="meta"><li><i class="icon icon-author"></i>Kevin</li><li><i class="icon icon-clock"></i>5 Minutes</li><li><i class="icon icon-calendar"></i>2017年8月10日</li></ul></div></div><div class="article-content" style="max-width:800px"><p>作为一个Web前端开发人员，一些服务器端的知识也是必不可少的。我之前也有了解过服务器端，可是对有的东西仍是一知半解的。今天在知乎中看到一篇文章，把<a href="https://www.zhihu.com/question/24723688/answer/128105528" target="_blank" rel="noopener">正向代理和反向代理</a>讲解的很透彻。由此，我便想站在一个前端开发者的角度，谈谈正向代理和反向代理。</p>
+<h2 id="有哪些需求场景"><a href="#有哪些需求场景" class="headerlink" title="有哪些需求场景"></a>有哪些需求场景</h2><p>先不谈概念，先说需求。</p>
+<ol>
+<li>对于一个程序员来说，会科学上网是必不可少的。有的东西，在国内是访问不了的，那么如何访问像谷歌这样的网站呢？</li>
+<li>有时候，我们写了一个前端应用（Web App），如何部署到服务器上呢？如果我们有多个应用，又如何部署呢？</li>
+</ol>
+<p>这可能是大多数前端人员都会有的需求，因为我最近也是对第二个需求犯困。对于我们来说，可能最简单的方式就是直接托管到<code>github</code>上，我们知道，Github是可以开启静态页面功能的。注意这里的“静态”二字，也就是说，如果我们的应用需要连接数据库，需要实现后端路由（当然，也可以在前端实现路由技术），就需要我们自己部署服务器，并且写服务器端的代码。幸运的是，现在有了<code>Node.js</code>，我们可以直接通过<code>JavaScript</code>来写后端代码。这可能扯的有点远，有点超出前端的范畴了，但是，前端的终极目标是“全栈”啊。</p>
+<p><em>由于JavaScript的越来越强大，原本应该在服务端做的事情，现在很多都是在前端来完成了。后面有时间会专门写一篇关于<code>Vue</code>的前端路由（<code>vue-router</code>）的文章。</em></p>
+<h2 id="正向代理和反向代理"><a href="#正向代理和反向代理" class="headerlink" title="正向代理和反向代理"></a>正向代理和反向代理</h2><p>原文看<a href="https://foofish.net/proxy-and-reverse-proxy.html" target="_blank" rel="noopener">这里</a>。</p>
+<h3 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h3><p>比如，<strong>客户端</strong>要访问<strong>Google</strong>，但是不直接去访问，而且让一个<strong>代理服务器</strong>去访问<strong>Google</strong>，然后<strong>代理服务器</strong>再将访问到的信息返回给<strong>客户端</strong>。这里的<strong>代理服务器</strong>所实现的功能就叫做<strong>正向代理</strong></p>
+<p>特点：<strong>Google</strong>并不知道是哪个<strong>客户端</strong>访问的。</p>
+<p>根据这个特点，我们就可以在国外部署一个<strong>代理服务器</strong>，这个服务器有正向代理的功能。我们就可以通过这个代理服务器实现科学上网，盗一张图说明一下。</p>
+<p><img src="http://moohng.oss-cn-shenzhen.aliyuncs.com/article/proxy.jpg" alt="正向代理"></p>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>对于<strong>百度</strong>来说，服务器肯定不止一台，后面可能会有成千上万的服务器。当我们去访问<strong>百度服务器</strong>的时候，<strong>百度服务器</strong>会将我们的请求转发给<strong>背后的真实的服务器</strong>。这个过程中，<strong>百度服务器</strong>实现的功能就是<strong>反向代理</strong>。</p>
+<p>特点：<strong>客户端</strong>不知道访问的<strong>真实的服务器</strong>是哪一个。</p>
+<p><img src="http://moohng.oss-cn-shenzhen.aliyuncs.com/article/reverse-proxy.jpg" alt="反向代理"></p>
+<p>反向代理就是这个意思，至于如何实现反向代理，我也在摸索中，不过网上也有不少<code>Nginx</code>实现反向代理的教程。好吧，又得需要学习不少<code>Nginx</code>的知识，着实感觉自己在前端开发的大坑里越走越远、越走越偏了。</p>
+<h2 id="反向代理部署Web应用"><a href="#反向代理部署Web应用" class="headerlink" title="反向代理部署Web应用"></a>反向代理部署Web应用</h2><p><code>Nginx</code>是一个HTTP服务器，主要用来处理<strong>静态资源</strong>和作为<strong>反向代理</strong>，还有一个叫<code>Apache</code>的东西，不过现在好像用<code>Nginx</code>的多。</p>
+<h3 id="乱七八糟的概念"><a href="#乱七八糟的概念" class="headerlink" title="乱七八糟的概念"></a>乱七八糟的概念</h3><p><code>Nginx</code>本质上就是一个运行在Linux服务器上的一个应用程序，它可以监听来自客户端的http请求，然后返回服务器上固定的资源（HTML文档、音视频、图片等）。</p>
+<p>http的请求默认是<code>80</code>端口，所以一般<code>Nginx</code>只监听<code>80</code>端口（当然也可以监听其他端口），然后根据不同的路由参数或其他判断，反向代理到其他的服务器（真实的服务器）。比如，我们访问<code>www.baidu.com</code>的时候，从PC端和手机端访问的页面是不一样的。</p>
+<h3 id="部署Web应用"><a href="#部署Web应用" class="headerlink" title="部署Web应用"></a>部署Web应用</h3><p>何为静态资源？就是服务器上存在的一个实实在在的文件，<code>Nginx</code>本身不会执行任何脚本语言，而是直接返回某个资源文件。很多时候，我们可能需要执行一些像<code>php</code>、<code>Python</code>等服务器脚本，通过这些脚本从数据库中获取数据，拼接成不同的HTML文件，最后返回给浏览器。</p>
+<p>一个典型的例子就是<strong>Vue的服务端渲染</strong>，我们一般使用的可能都是浏览器直接渲染。但是对于一个复杂而庞大的Web应用，浏览器渲染显然不合适，这时候就需要部署一个Web服务器，可以是<code>Node.js</code>搭建的服务器，因为我们可以直接在服务器端使用<code>JavaScript</code>语言。然后，我们再通过<code>Nginx</code>服务器反向代理到我们的<strong>Web服务器</strong>。</p>
+<p>可能，这里有点迷惑：我们直接访问我们的Web服务器不就行了，干嘛还要通过<code>Nginx</code>服务器来作反向代理呢？</p>
+<p>的确，我们也可以直接访问我们Web服务器。但是你想，一般我们可能只有一个域名，也就是说，对外只提供一个可访问的接口。用反向代理的话，我们就只需要对外提供<code>Nginx</code>服务器的访问链接。而我们的Web应用可能不止一个，你不可能为每一个Web应用都绑定一个域名吧。</p>
+<p>其实就像前面说的，现在<code>JavaScript</code>越来越强大，很多原本在服务器端要做的事情在前端也能够完成。对于我们前端开发人员来说，只要后台提供数据接口，页面的动态渲染在前端完全可以自己实现。</p>
+<h2 id="正向代理实现科学上网"><a href="#正向代理实现科学上网" class="headerlink" title="正向代理实现科学上网"></a>正向代理实现科学上网</h2><p>科学上网的工具有很多，我现在正在使用的是<code>ShadowSocks</code>（影梭）。至于服务器搭建教程网上真的很多，自行百度就好。</p>
+<p>那么，首先你得有一台服务器，必须是国外或香港的服务器。这里有一些关于服务器的概念，我想有必要说一下：</p>
+<ul>
+<li>VPS：<code>Virtual Private Server</code>，虚拟专用服务器。它是将一台真实的物理服务器通过一种虚拟化技术分成多个虚拟的服务器，俗称VPS。有独立的操作系统和IP地址。</li>
+<li>云服务器：跟<code>VPS</code>不同，它是通过多个CPU、内存、硬盘组成的，典型的就是阿里云服务器。比如我们可以动态的选择几核、多大内存、多大硬盘，并且它不受物理服务器的影响。有独立的操作系统和IP地址</li>
+<li>虚拟主机：也就是共享主机，它将一台真实的物理服务器分成多个主机，可以托管多个网站。它跟VPS最大的不同在于，没有独立的操作系统和IP地址，用户不能灵活地搭建自己想要的服务器，基本上只能用来做网站。</li>
+</ul>
+<p>因此，基于以上的介绍，我们如果要搭建<code>ShadowSocks</code>服务器，就必须选择VPS或云服务器。我建议一般选择<code>VPS</code>就好了，便宜嘛，对于一个上网工具来说，足够了。如果我们要部署我们自己的服务器，建议选择云服务器，安全灵活。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>这篇文章写得有点乱，我现在也是正在研究这方面的东西，越到后面逻辑就越不清晰了，暂且就当作是自己的学习笔记好了。</p>
+</div><div class="article-meta" style="max-width:800px"><div class="tags"><i class="icon icon-tag"></i><ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/反向代理/">反向代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正向代理/">正向代理</a><span class="tag-list-count">1</span></li></ul></div><div class="categories"><i class="icon icon-category"></i><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/全栈/">全栈</a><span class="category-list-count">4</span></li></ul></div></div><div class="article-comment" style="max-width:800px"><div class="ds-thread" id="ds-thread" data-thread-key="cjlf039yp0006fwutqhw6a9qr" data-title="正向代理和反向代理，一次说清" data-url="http://moohng.com/2017/08/10/cjlf039yp0006fwutqhw6a9qr/" site-name="ueibo"></div><script>var siteName = document.getElementById('ds-thread').getAttribute('site-name');
+var duoshuoQuery = {short_name: siteName};
+(function() {
+  var ds = document.createElement('script');
+  ds.type = 'text/javascript';ds.async = true;
+  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+  ds.charset = 'UTF-8';
+  (document.getElementsByTagName('head')[0] 
+  || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script></div><ul class="navication"><li class="home"><a href="/"><i class="icon icon-home"></i></a></li><li><a href="/2017/08/10/cjlf039ym0004fwututp2odah/"><i class="icon icon-arror-left"></i></a></li><li><a href="/2017/08/08/cjlf039yf0001fwutrwypc5q4/"><i class="icon icon-arror-right"></i></a></li></ul><div class="page-footer"><div class="top"><ul class="social"><li><a href="https://github.com/moohng" title="Github" target="_blank"><i class="icon icon-github"></i></a></li><li><a href="https://weibo.com/moohng" title="Weibo" target="_blank"><i class="icon icon-weibo"></i></a></li><li><a href="https://www.segmentfault.com/u/bon" title="SegmentFault" target="_blank"><i class="icon icon-segmentfault"></i></a></li></ul></div><div class="bottom"><p class="copyright">© 2018 红颜漠<br><small>POWER BY <a href="https://hexo.io" target="_blank">HEXO</a></small><small>, THEME BY <a href="https://github.com/BoizZ/hexo-theme-laughing" target="_blank">LAUGHING</a></small></p></div></div></div><script>var wrap = document.getElementById('wrap');
+window.onload = function () {
+  wrap.className += ' done';
+}</script></body></html>
