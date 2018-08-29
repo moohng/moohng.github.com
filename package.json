@@ -7,7 +7,8 @@
   },
   "scripts": {
     "start": "hexo server",
-    "deploy": "hexo clean && hexo g -d"
+    "deploy": "hexo clean && hexo g -d",
+    "new": "hexo new"
   },
   "devDependencies": {
     "hexo": "^3.7.1",
